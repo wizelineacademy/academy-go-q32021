@@ -3,8 +3,7 @@ package repository
 import (
 	"fmt"
 	"strings"
-
-	infraestructure "github.com/Marcxz/academy-go-q32021/infraestructure/csv"
+    "github.com/Marcxz/academy-go-q32021/infraestructure"
 )
 
 type csv interface {
