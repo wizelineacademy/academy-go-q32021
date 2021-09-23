@@ -1,6 +1,7 @@
 package models
 
 type Address struct {
-	A string `json:"a"`
-	P Point  `json:"p"`
+	Id int
+	A  string `json:"a"`
+	P  Point  `json:"p"`
 }
