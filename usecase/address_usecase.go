@@ -60,8 +60,8 @@ func (*auc) geoAddress(a string) (*models.Address, error) {
 
 func (*auc) readCSVAddress(f string) ([]models.Address, error) {
 	as = make([]models.Address, 0)
-	
-	if (f == "") {
+
+	if f == "" {
 		f = "address.csv"
 	}
 

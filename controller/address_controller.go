@@ -11,13 +11,13 @@ import (
 var (
 	au = usecase.NewAddressUseCase();
 )
-type address interface {
+type Address interface {
 	readCSVAddress(s string)
 }
 
 type c struct{}
 
-NewAddressController() address {
+NewAddressController() Address {
 	return &c{}
 }
 
