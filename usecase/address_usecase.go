@@ -32,17 +32,17 @@ func validate(i int, l string) error {
 
 	_, err := strconv.Atoi(al[0])
 	if err != nil {
-		return fmt.Errorf("the id at the index %d should be integer", i)
+		return fmt.Errorf("the id at the index %d should be integer %s", i, al[0])
 	}
 
 	_, err = strconv.ParseFloat(al[2], 64)
 	if err != nil {
-		return fmt.Errorf("the lat column at the index %s should be float", al[2])
+		return fmt.Errorf("the lat column at the index %d should be float %s", i, al[2])
 	}
 
-	_, err = strconv.ParseFloat(al[3], 64)
+	_, err = strconv.ParseFloat(strings.Replace(al[3], "\r", "", 1), 64)
 	if err != nil {
-		return fmt.Errorf("the lng column at the index %s should be float", al[3])
+		return fmt.Errorf("the lng column at the index %d should be float %s", i, al[3])
 	}
 
 	return nil
@@ -80,8 +80,8 @@ func (*auc) ReadCSVAddress(f string) ([]models.Address, error) {
 		id, _ := strconv.Atoi(al[0])
 		an := al[1]
 		lat, _ := strconv.ParseFloat(al[2], 64)
-		lng, _ := strconv.ParseFloat(al[3], 64)
-		a := &models.Address{
+		lng, _ := strconv.ParseFloat(strings.Replace(al[3], "\r", "", 1), 64)
+		a := models.Address{
 			Id: id,
 			A:  an,
 			P: models.Point{
@@ -89,7 +89,7 @@ func (*auc) ReadCSVAddress(f string) ([]models.Address, error) {
 				Lng: lng,
 			},
 		}
-		as = append(as, *a)
+		as = append(as, a)
 	}
 
 	return as, nil
