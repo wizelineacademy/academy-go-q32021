@@ -1,6 +1,6 @@
 package models
 
-type route struct {
+type Route struct {
 	Id   int     `json:"id"`
 	Name string  `json:"name"`
 	From address `json:"from"`

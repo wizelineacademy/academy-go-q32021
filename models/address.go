@@ -1,7 +1,7 @@
 package models
 
-type address struct {
+type Address struct {
 	Id int    `json:"id"`
 	A  string `json:"a"`
-	P  point  `json:"p"`
+	P  Point  `json:"p"`
 }

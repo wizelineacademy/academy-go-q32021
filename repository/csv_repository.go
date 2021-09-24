@@ -3,7 +3,6 @@ package repository
 import (
 	"fmt"
 	"strings"
-
 	"github.com/Marcxz/academy-go-q32021/infraestructure"
 )
 

@@ -9,18 +9,18 @@ import (
 	"github.com/Marcxz/academy-go-q32021/repository"
 )
 
-type address interface {
-	readCSVAddress(string) ([]models.address, error)
+type Address interface {
+	readCSVAddress(string) ([]models.Address, error)
 }
 
 var (
 	cr = repository.NewCsvRepository()
-	as = make([]models.address, 0)
+	as = make([]models.Address, 0)
 )
 
 type auc struct{}
 
-func NewAddressUseCase() address {
+func NewAddressUseCase() Address {
 	return &auc{}
 }
 
@@ -58,7 +58,7 @@ func (*auc) geoAddress(a string) (*models.Address, error) {
 }
 */
 
-func (*auc) readCSVAddress(f string) ([]models.address, error) {
+func (*auc) readCSVAddress(f string) ([]models.Address, error) {
 	as = make([]models.Address, 0)
 	
 	if (f == "") {
