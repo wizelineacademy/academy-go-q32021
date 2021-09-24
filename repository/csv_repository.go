@@ -3,11 +3,12 @@ package repository
 import (
 	"fmt"
 	"strings"
-    "github.com/Marcxz/academy-go-q32021/infraestructure"
+
+	"github.com/Marcxz/academy-go-q32021/infraestructure"
 )
 
 type csv interface {
-	ReadCSVFile(f string) ([]string, error)
+	readCSVFile(f string) ([]string, error)
 }
 
 type cr struct{}
@@ -16,7 +17,7 @@ func NewCsvRepository() csv {
 	return &cr{}
 }
 
-func (*cr) ReadCSVFile(f string) ([]string, error) {
+func (*cr) readCSVFile(f string) ([]string, error) {
 	cl, err := infraestructure.ReadCSVFile(f)
 
 	if err != nil {
