@@ -10,7 +10,7 @@ import (
 )
 
 type Address interface {
-	readCSVAddress(string) ([]models.Address, error)
+	ReadCSVAddress(string) ([]models.Address, error)
 }
 
 var (
@@ -58,14 +58,14 @@ func (*auc) geoAddress(a string) (*models.Address, error) {
 }
 */
 
-func (*auc) readCSVAddress(f string) ([]models.Address, error) {
+func (*auc) ReadCSVAddress(f string) ([]models.Address, error) {
 	as = make([]models.Address, 0)
 
 	if f == "" {
 		f = "address.csv"
 	}
 
-	cl, err := cr.readCSVFile(f)
+	cl, err := cr.ReadCSVFile(f)
 
 	if err != nil {
 		return nil, err

@@ -12,7 +12,7 @@ var (
 	au = usecase.NewAddressUseCase();
 )
 type Address interface {
-	readCSVAddress(s string)
+	ReadCSVAddress(s string)
 }
 
 type c struct{}
@@ -21,8 +21,8 @@ NewAddressController() Address {
 	return &c{}
 }
 
-func (*c) readCSVAddress(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	ad, err := au.readCSVAddress()
+func (*c) ReadCSVAddress(w http.ResponseWriter, r *http.Request) {
+	ad, err := au.ReadCSVAddress()
 
 	if (err != nil) {
 		HandleError(w, r, err)
