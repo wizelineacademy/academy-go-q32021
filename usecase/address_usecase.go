@@ -9,6 +9,7 @@ import (
 	"github.com/Marcxz/academy-go-q32021/repository"
 )
 
+// Address - the interace for the address usecase
 type Address interface {
 	ReadCSVAddress(string) ([]models.Address, error)
 }
@@ -20,10 +21,12 @@ var (
 
 type auc struct{}
 
+// NewAddressUseCase - func to create a new address usecase used to link with the controller
 func NewAddressUseCase() Address {
 	return &auc{}
 }
 
+// validate - func to validate if an string address has the minimun requirements to be an address struc
 func validate(i int, l string) error {
 	al := strings.Split(l, "|")
 	if len(al) != 4 {
@@ -58,6 +61,7 @@ func (*auc) geoAddress(a string) (*models.Address, error) {
 }
 */
 
+// ReadCSVAddress - func to do the bussiness logic when you read all the address from a csv file
 func (*auc) ReadCSVAddress(f string) ([]models.Address, error) {
 	as = make([]models.Address, 0)
 

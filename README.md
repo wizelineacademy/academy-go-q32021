@@ -1,3 +1,28 @@
+# First Deliverable
+
+In this step I create the Api Architecture, an endpoint where it will read the file where I will store and read the information of the project.
+
+## Prerequisites
+
+You should install all the project dependecies with the next instruction:
+
+```sh
+   go get ./...
+   ```
+## Run and Consult
+
+The API Run on the port 3000 and to run up you should type the next instruction: 
+
+```sh
+   go run ./main.go
+   ```
+
+There is an endpoint wich read a csv file where I store different addresses and return in a JSON format:
+
+```sh
+   http://localhost:3000/address
+   ```
+
 # Golang Bootcamp
 
 ## Introduction
