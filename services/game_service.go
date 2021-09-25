@@ -36,13 +36,17 @@ func parseCsv() ([]common.Game, error) {
 
 func FindGame(id int) (common.Game, error) {
 	games, err := parseCsv()
+	if err != nil {
+		return common.Game{}, err
+	}
+
 	for _, g := range games {
 		if g.ID == id {
 			return g, nil
 		}
 	}
 
-	return common.Game{}, err
+	return common.Game{}, nil
 }
 
 func FindGames() ([]common.Game, error) {

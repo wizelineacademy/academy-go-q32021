@@ -12,7 +12,5 @@ func ReadCsvFile(filename string) ([][]string, error) {
 	}
 
 	reader := csv.NewReader(file)
-	records, err := reader.ReadAll()
-
-	return records[1:], err
+	return reader.ReadAll()
 }

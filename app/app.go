@@ -14,5 +14,6 @@ func RunApp() {
 	// e.Use(e.Recover())
 
 	e.GET("/games", routes.GetGames)
+	e.GET("/games/:id", routes.GetGame)
 	e.Logger.Fatal(e.Start(":5000"))
 }
