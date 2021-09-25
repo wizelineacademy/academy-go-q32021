@@ -4,7 +4,10 @@ import (
 	c "api/controller"
 
 	"github.com/gorilla/mux"
+	"github.com/unrolled/render"
 )
+
+var Resp = render.New()
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)

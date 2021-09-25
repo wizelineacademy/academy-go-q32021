@@ -11,20 +11,23 @@ import (
 	"github.com/unrolled/render"
 )
 
-var Resp = render.New()
-
 func ReadCSV(w http.ResponseWriter, r *http.Request) {
 
+	var resp = render.New()
 	var Contestants []model.Contestant
 
 	csvf, err := os.Open("../api/lmd.csv")
 	if err != nil {
 		fmt.Println(err)
+		resp.JSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
 	}
 
 	csvLines, err := csv.NewReader(csvf).ReadAll()
 	if err != nil {
 		fmt.Println(err)
+		resp.JSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
 	}
 
 	defer csvf.Close()
@@ -50,5 +53,5 @@ func ReadCSV(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("Endpoint reached: readCSV")
-	Resp.JSON(w, http.StatusOK, Contestants)
+	resp.JSON(w, http.StatusOK, Contestants)
 }
