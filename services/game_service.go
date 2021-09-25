@@ -6,7 +6,7 @@ import (
 )
 
 func parseCsv() ([]common.Game, error) {
-	records, err := common.ReadCsvFile("steam.csv")
+	records, err := common.ReadCsvFile(common.CsvPath)
 	if err != nil {
 		return make([]common.Game, 0), err
 	}
@@ -34,6 +34,7 @@ func parseCsv() ([]common.Game, error) {
 	return slice, nil
 }
 
+// FindGame - Returns a game struct from the csv file with specified id, if not found returns default value struct, and an error if one occurs
 func FindGame(id int) (common.Game, error) {
 	games, err := parseCsv()
 	if err != nil {
@@ -49,6 +50,7 @@ func FindGame(id int) (common.Game, error) {
 	return common.Game{}, nil
 }
 
+// FindGames - Returns all the game structs from the csv file and an error if one occurs
 func FindGames() ([]common.Game, error) {
 	games, err := parseCsv()
 	return games[7:], err
