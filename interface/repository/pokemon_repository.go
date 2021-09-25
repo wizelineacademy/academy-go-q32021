@@ -31,13 +31,37 @@ func (ur *pokemonRepository) FindAll(u []*model.Pokemon) ([]*model.Pokemon, erro
 
 	csvReader := csv.NewReader(f)
 	records, err := csvReader.ReadAll()
-
+	first := true
 	for _, record := range records {
+		if first {
+			first = false
+			continue
+		}
 		tmpID, _ := strconv.Atoi(record[0])
+		tmpTotal, _ := strconv.Atoi(record[4])
+		tmpHp, _ := strconv.Atoi(record[5])
+		tmpAttack, _ := strconv.Atoi(record[6])
+		tmpDefense, _ := strconv.Atoi(record[7])
+		tmpSpAttack, _ := strconv.Atoi(record[8])
+		tmpSpDefense, _ := strconv.Atoi(record[9])
+		tmpSpeed, _ := strconv.Atoi(record[10])
+		tmpGeneration, _ := strconv.Atoi(record[11])
+		tmpLegendary, _ := strconv.ParseBool(record[12])
+
 		pokemon := model.Pokemon{
-			ID:   tmpID,
-			Name: record[1],
-			Type: record[2],
+			ID:        tmpID,
+			Name:      record[1],
+			Type:      record[2],
+			Type_2:    record[3],
+			Total:     tmpTotal,
+			HP:        tmpHp,
+			Attack:    tmpAttack,
+			Defense:   tmpDefense,
+			SpAttack:  tmpSpAttack,
+			SpDefense: tmpSpDefense,
+			Speed:     tmpSpeed,
+			Gen:       tmpGeneration,
+			Legendary: tmpLegendary,
 		}
 
 		u = append(u, &pokemon)

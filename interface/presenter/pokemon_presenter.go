@@ -14,8 +14,8 @@ func NewPokemonPresenter() PokemonPresenter {
 }
 
 func (up *pokemonPresenter) ResponsePokemons(us []*model.Pokemon) []*model.Pokemon {
-	for _, u := range us {
-		u.Name = "Pokemon: " + u.Name
-	}
+	// for _, u := range us {
+	// 	u.Name = "Pokemon: " + u.Name
+	// }
 	return us
 }

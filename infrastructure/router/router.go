@@ -1,33 +1,16 @@
 package router
 
 import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/gorilla/mux"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
+	"github.com/macrojoe/academy-go-q32021/interface/controller"
 )
 
-func HandleRequests() {
-	// creates a new instance of a mux router
-	myRouter := mux.NewRouter().StrictSlash(true)
-	// replace http.HandleFunc with myRouter.HandleFunc
-	myRouter.HandleFunc("/api/v1/hello", hello)
-	myRouter.HandleFunc("/api/v1/csv", csv)
-	// finally, instead of passing in nil, we want
-	// to pass in our newly created router as the second
-	// argument
-	log.Fatal(http.ListenAndServe(":8080", myRouter))
-}
+func NewRouter(e *echo.Echo, c controller.AppController) *echo.Echo {
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	response := map[string]string{
-		"response": "hello",
-	}
-	json.NewEncoder(w).Encode(response)
-}
+	e.GET("/pokemons", func(context echo.Context) error { return c.GetPokemons(context) })
 
-func csv(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome home!")
+	return e
 }
