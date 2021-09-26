@@ -54,7 +54,7 @@ func getCsvValues (fn string) ([]model.Pokemon, error) {
   return pkmList, nil
 }
 
-func(ci *csvInteractor) saveCsvValues (fn string, pkm []model.Pokemon) error {
+func saveCsvValues (fn string, pkm []model.Pokemon) error {
   file, err := os.Open(fn)
 
   if (err != nil){
