@@ -4,12 +4,14 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Diegoplas/go-bootcamp-deliverable/routes"
+	"github.com/Diegoplas/go-bootcamp-deliverable/config"
+	"github.com/Diegoplas/go-bootcamp-deliverable/route"
+
 	"github.com/gorilla/handlers"
 )
 
 func main() {
-	router := routes.GetRouter()
-	methods := handlers.AllowedMethods([]string{"GET"})
-	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(methods)(router)))
+	router := route.GetRouter()
+	methods := handlers.AllowedMethods([]string{http.MethodGet})
+	log.Fatal(http.ListenAndServe(config.Port, handlers.CORS(methods)(router)))
 }

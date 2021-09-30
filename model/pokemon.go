@@ -1,4 +1,4 @@
-package utils
+package model
 
 type PokemonData struct {
 	ID        int    `json:"id"`

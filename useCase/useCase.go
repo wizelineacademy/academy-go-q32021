@@ -1,40 +1,24 @@
-package useCase
+package usecase
 
 import (
-	"strconv"
+	"errors"
+	"fmt"
 
-	"github.com/Diegoplas/go-bootcamp-deliverable/app"
-	"github.com/Diegoplas/go-bootcamp-deliverable/utils"
+	"github.com/Diegoplas/go-bootcamp-deliverable/csvdata"
+	"github.com/Diegoplas/go-bootcamp-deliverable/model"
 )
 
-func GetPokemonFromCSV(wantedIndex int) utils.PokemonData {
+func GetPokemonFromCSV(wantedIndex int) (model.PokemonData, error) {
 
-	csvLines := app.CSVReader()
+	allPokemons, err := csvdata.ListPokemons()
+	if err != nil {
+		return model.PokemonData{}, fmt.Errorf("error reading CSV file: %v", err.Error())
+	}
 
-	for _, line := range csvLines {
-
-		pokemonID, _ := strconv.Atoi(line[0])
-
-		if pokemonID == wantedIndex {
-
-			if line[3] == "" {
-				line[3] = " - "
-			}
-
-			legendary := false
-			if line[4] == "TRUE" {
-				legendary = true
-			}
-
-			pokemon := utils.PokemonData{
-				ID:        pokemonID,
-				Name:      line[1],
-				Type1:     line[2],
-				Type2:     line[3],
-				Legendary: legendary,
-			}
-			return pokemon
+	for _, pokemon := range allPokemons {
+		if pokemon.ID == wantedIndex {
+			return pokemon, nil
 		}
 	}
-	return (utils.PokemonData{})
+	return model.PokemonData{}, errors.New("no pokemon found")
 }
