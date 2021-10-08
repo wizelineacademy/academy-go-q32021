@@ -1,4 +1,4 @@
-package utils
+package config
 
 import (
 	"encoding/json"
@@ -15,8 +15,6 @@ type config struct {
 	Server server `json:"server"`
 }
 
-var Config config
-
 func ReadConfig(path string) (config, error) {
 
 	jsonf, err := os.Open(path)
@@ -31,7 +29,13 @@ func ReadConfig(path string) (config, error) {
 		return *new(config), err
 	}
 
-	json.Unmarshal(data, &Config)
+	var Config config
+
+	err = json.Unmarshal(data, &Config)
+	if err != nil {
+		return *new(config), err
+	}
+
 	defer jsonf.Close()
 
 	if (config{}) == Config {

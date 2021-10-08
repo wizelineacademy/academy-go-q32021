@@ -5,13 +5,13 @@ import (
 	"log"
 	"net/http"
 
-	"api/router"
-	"api/utils"
+	"github.com/emamex98/academy-go-q32021/config"
+	"github.com/emamex98/academy-go-q32021/router"
 )
 
 func main() {
 
-	conf, err := utils.ReadConfig("config.json")
+	conf, err := config.ReadConfig("config.json")
 
 	if err != nil {
 		log.Fatalln(err)
