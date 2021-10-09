@@ -1,6 +1,6 @@
 package model
 
-type Contestant struct {
+type ContestantDetailed struct {
 	ID           int    `json:"ID"`
 	Contestant   string `json:"Contestant"`
 	RealName     string `json:"Real Name"`

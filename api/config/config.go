@@ -39,7 +39,7 @@ func ReadConfig(path string) (config, error) {
 	defer jsonf.Close()
 
 	if (config{}) == Config {
-		return config{}, errors.New("there was a problem reading the config file, please check.")
+		return config{}, errors.New("there was a problem reading the config file, please check")
 	}
 
 	return Config, nil

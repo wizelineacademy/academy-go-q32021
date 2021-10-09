@@ -16,7 +16,7 @@ func GetContestans(w http.ResponseWriter, r *http.Request) {
 
 	resp := render.New()
 
-	contestants, err := fetchContestansFromCSV(resp, w)
+	contestants, err := fetchContestansList(resp, w)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -36,23 +36,25 @@ func GetSingleContestant(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	contestants, err := fetchContestansFromCSV(resp, w)
+	contestants, err := fetchContestansList(resp, w)
 	if err != nil {
 		fmt.Println(err)
 	}
 
+	fmt.Println("Endpoint reached: /contestants/" + strconv.Itoa(id))
+
 	for i := range contestants {
 		if contestants[i].ID == id {
-			resp.JSON(w, http.StatusOK, contestants[i])
+			con := contestants[i]
+			con.Bio = utils.FetchInfo(id)
+			resp.JSON(w, http.StatusOK, con)
 			return
 		}
 	}
-
-	fmt.Println("Endpoint reached: /contestants/" + strconv.Itoa(id))
 	resp.JSON(w, http.StatusNotFound, map[string]string{"error": "id not found"})
 }
 
-func fetchContestansFromCSV(resp *render.Render, w http.ResponseWriter) ([]model.Contestant, error) {
+func fetchContestansList(resp *render.Render, w http.ResponseWriter) ([]model.Contestant, error) {
 
 	var Contestants []model.Contestant
 
@@ -93,10 +95,13 @@ func fetchContestansFromCSV(resp *render.Render, w http.ResponseWriter) ([]model
 			Age:          age,
 			CurrentCity:  line[4],
 			CurrentScore: score,
+			Bio:          utils.FetchInfo(id),
 		}
 
 		Contestants = append(Contestants, cont)
 	}
+
+	utils.WriteChangesToCSV("../api/output.csv", Contestants)
 
 	return Contestants, nil
 }
