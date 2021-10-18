@@ -7,7 +7,6 @@ import (
 )
 
 func ErrorResponse(e int, m string, elapsed time.Time) logrus.Fields {
-	// t := Todo{Result: response, Completed: true, Due: time.Now()}
 
 	start := time.Now()
 
