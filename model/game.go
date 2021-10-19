@@ -11,3 +11,13 @@ type LastGameData struct {
 	num_players int
 	map_type    int
 }
+
+type Player struct {
+	Rank    int
+	Country string
+	Clan    string
+	Name    string
+	Games   int
+	Wins    int
+	Losses  int
+}

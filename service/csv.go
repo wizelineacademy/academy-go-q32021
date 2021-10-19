@@ -31,8 +31,9 @@ func GetLeaderInCSV(country string) map[string]string {
 		if record[3] == country {
 
 			result := map[string]string{
-				"name": record[1],
-				"rank": record[0],
+				"country": record[3],
+				"name":    record[1],
+				"rank":    record[0],
 			}
 			return result
 		}
